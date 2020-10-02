@@ -13,9 +13,14 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 
 public class TestHandler implements FileAlterationListener
 {
+	private String name;
+	private String id;
+	private String pw;
+	private String address;
+
     public TestHandler()
     {
-        
+    	    
 	}
 
 	@Override
@@ -64,6 +69,62 @@ public class TestHandler implements FileAlterationListener
 	public void onStop(FileAlterationObserver observer) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the pw
+	 */
+	public String getPw() {
+		return pw;
+	}
+
+	/**
+	 * @param pw the pw to set
+	 */
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
 
