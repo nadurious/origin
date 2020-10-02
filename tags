@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+App	src/main/java/com/mediaflex/App.java	/^public class App $/;"	c
+AppTest	src/test/java/com/mediaflex/AppTest.java	/^public class AppTest $/;"	c
+Test	src/main/java/com/mediaflex/Test.java	/^    public Test()$/;"	m	class:Test
+Test	src/main/java/com/mediaflex/Test.java	/^public class Test$/;"	c
+com.mediaflex	src/main/java/com/mediaflex/App.java	/^package com.mediaflex;$/;"	p
+com.mediaflex	src/main/java/com/mediaflex/Test.java	/^package com.mediaflex;$/;"	p
+com.mediaflex	src/test/java/com/mediaflex/AppTest.java	/^package com.mediaflex;$/;"	p
+main	src/main/java/com/mediaflex/App.java	/^    public static void main( String[] args )$/;"	m	class:App
+shouldAnswerWithTrue	src/test/java/com/mediaflex/AppTest.java	/^    public void shouldAnswerWithTrue()$/;"	m	class:AppTest
