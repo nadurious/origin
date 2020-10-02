@@ -49,17 +49,17 @@ public class MovieHandler extends AbstractFileHandler {
 			
 			if(stat.equals(MAConsts.CREATE)) {
 				
-				//���丮�϶� ���� �� ��
+				//디렉토리인 경우.
 				if(isDirectory) {
 					return;
 				}
 				
-				//�̹� ���丮�� ������ �Ŀ� ���� �� ��
+				//키값이 부모 디렉토리와 동일한 경우.
 				if(key.equals(file.getParentFile().getName())){
 					return;
 				}
 				
-				//���丮�� ������
+				//파일이 미디어 파일일 때.
 				if(util.isMediaFile(file)) {
 					File dir = mkdir(MAConsts.MOVIE_PATH + file.separator + key);
 					log.info("MKDIR : [" + dir.getAbsolutePath() +"]");
@@ -153,7 +153,7 @@ public class MovieHandler extends AbstractFileHandler {
 //				log.info("REMOVE : [" + file.getParentFile().getName() + file.separator +file.getName() + "]");
 			}//DELETE
 			else {
-				throw new Exception("MediaHandler�� ���°��� ������ �ʾҽ��ϴ�.");
+				throw new Exception("MediaHandler 알 수 없는 생성값이 들어옴.");
 			}
 			
 			log.debug("REMOVE Result : " + MovieController.moviefiles.toString());
@@ -176,7 +176,7 @@ public class MovieHandler extends AbstractFileHandler {
 		if(MovieController.moviefiles.containsKey(key)) {
 			movieFile = MovieController.moviefiles.get(key);
 		} else {
-			log.info(logKey + " ������ �̵�� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + " 파일이 존재하지 않습니다.");
 			return result;
 		}
 		
@@ -184,7 +184,7 @@ public class MovieHandler extends AbstractFileHandler {
 		if(SubtitleController.subtitlefiles.containsKey(key)) {
 			subtitleFile = SubtitleController.subtitlefiles.get(key);	
 		} else {
-			log.info(logKey + " ������ �ڸ� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + " 자막 파일이 존재하지 않습니다.");
 			return result;
 		}
 		
@@ -202,11 +202,11 @@ public class MovieHandler extends AbstractFileHandler {
 		}
 		else {
 			if(movieFile.get(MAConsts.DIRECTORY) == null) {
-				log.error(file.getName() + " �� �ڸ������� �̵��� ���丮�� �����ϴ�.");
+				log.error(file.getName() + " 파일의 디렉토리가 존재하지 않습니다.");
 			} else if(subtitleFile == null) {
-				log.error(file.getName() + " �� �ڸ� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 자막파일이 존재하지 않습니다.");
 			} else if(movieFile == null) {
-				log.error(file.getName() + " �� �̵�� ������ �����ϴ�.");
+				log.error(file.getName() + "파일의 미디어 파일이 존재하지 않습니다.");
 			}
 		}
 		return result;

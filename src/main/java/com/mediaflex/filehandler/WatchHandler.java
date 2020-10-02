@@ -33,13 +33,13 @@ public class WatchHandler extends AbstractFileHandler {
 				
 				String path = file.getAbsolutePath();
 
-				//���丮 �� ���� ������ ����
+				//파일의 소유자를 변경해 준다
 				chown(path);
 
-				//�̵�� ��������
+				//미디어 파일인 경우
 				if(util.isMediaFile(file)) {
 					
-					//TV ��������
+					//TV 시리즈 인 경우
 					if(util.hasSiriesPattern(file)) {
 						String dest = MAConsts.TV_PATH + file.separator + file.getName();
 						if(MAConsts.RENAME_USE.equalsIgnoreCase(MAConsts.TRUE)) {
@@ -57,9 +57,7 @@ public class WatchHandler extends AbstractFileHandler {
 								+ "] -> [" + destFile.getParentFile().getName() + file.separator + destFile.getName() + "]");
 						return;
 					}
-					//�ٸ� ��������
-					
-					//MOVIE ��������
+					//MOVIE 미디어 파일인 경우
 					else {
 						String ext = FilenameUtils.getExtension(file.getName());
 						String destFileName = util.changeAllSpecialChar(FilenameUtils.removeExtension(file.getName()), ".");
@@ -80,7 +78,7 @@ public class WatchHandler extends AbstractFileHandler {
 					
 					
 				} 
-				//Subtitle ��������
+				//Subtitle 자막 파일 인 경우
 				else if(util.isSubtitle(file)) {
 					String dest = MAConsts.SUB_PATH + file.separator + file.getName();
 					if(util.hasSiriesPattern(file)) {
@@ -121,7 +119,7 @@ public class WatchHandler extends AbstractFileHandler {
 			else if(stat.equals(MAConsts.DELETE)) {
 			}//DELETE
 			else {
-				throw new Exception("WatchHandler : ���°��� ������ �ʾҽ��ϴ�.");
+				throw new Exception("WatchHandler : 알 수 없는 생성값입니다.");
 			}
 		} catch (Exception e) {
 			log.error(e.toString());

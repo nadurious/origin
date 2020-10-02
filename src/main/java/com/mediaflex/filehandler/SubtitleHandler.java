@@ -93,12 +93,12 @@ public class SubtitleHandler extends AbstractFileHandler {
 					
 					chmod(file.getAbsolutePath(), MAConsts.PERMISSION_777);
 					
-					//�ڸ������� �Ű��ִ� �۾�
-					//TV �ڸ��� ���
+					//시리즈 패턴이 있을 때
+					//TV 자막을 넣어준다.
 					if(util.hasSiriesPattern(file)){
 						putTvshowSubtitle();
 					}
-					//��ȭ �ڸ��� ���
+					//시리즈 패턴이 없을 때, 영화 자막을 넣어준다.
 					else {
 						putMovieSubtitle();
 					}
@@ -116,7 +116,7 @@ public class SubtitleHandler extends AbstractFileHandler {
 				
 				List<String> subtitleExtList = Arrays.asList(MAConsts.subtitleExts);
 				for(String subExt : subtitleExtList) {
-					//�ø��� ������ ���� ��
+					//시리즈 패턴이 있을 때, Key값을 시리즈 명만 잘라서 생성한다.
 					if(util.hasSiriesPattern(file)) {
 //						String fileKey = util.getRegStr(file.getName(), MAConsts.SEASON_PATTERN) + util.getRegStr(file.getName(), MAConsts.SIRIES_PATTERN);
 						key = util.getPureSiriesName(file.getName());
@@ -140,7 +140,7 @@ public class SubtitleHandler extends AbstractFileHandler {
 //				}
 			} 
 			else {
-				throw new Exception("SubtitleHandler : ���°��� ������ �ʾҽ��ϴ�.");
+				throw new Exception("SubtitleHandler : 알 수 없는 생성값이 들어 옴.");
 			}//DELETE
 			
 			
@@ -164,7 +164,7 @@ public class SubtitleHandler extends AbstractFileHandler {
 		if(TvshowController.tvshowfiles.containsKey(key)) {
 			tvshowFile = TvshowController.tvshowfiles.get(key);
 		} else {
-			log.info(logKey + "... ������ �̵�� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + "... 파일이 존재하지 않습니다.");
 			return;
 		}
 		
@@ -172,7 +172,7 @@ public class SubtitleHandler extends AbstractFileHandler {
 		if(SubtitleController.subtitlefiles.containsKey(key)) {
 			subtitleFile = SubtitleController.subtitlefiles.get(key);	
 		} else {
-			log.info(logKey + "... ������ �ڸ� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + "... 파일이 존재하지 않습니다.");
 			return;
 		}
 		
@@ -190,11 +190,11 @@ public class SubtitleHandler extends AbstractFileHandler {
 		}
 		else {
 			if(tvshowFile.get(MAConsts.DIRECTORY) == null) {
-				log.error(file.getName() + " �� �ڸ������� �̵��� ���丮�� �����ϴ�.");
+				log.error(file.getName() + " 파일의 디렉토리가 존재하지 않습니다.");
 			} else if(subtitleFile == null) {
-				log.error(file.getName() + " �� �ڸ� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 자막파일이 존재하지 않습니다.");
 			} else if(tvshowFile == null) {
-				log.error(file.getName() + " �� �̵�� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 미디어 파일이 존재하지 않습니다.");
 			}
 		}
 	}
@@ -209,7 +209,7 @@ public class SubtitleHandler extends AbstractFileHandler {
 		if(MovieController.moviefiles.containsKey(key)) {
 			movieFile = MovieController.moviefiles.get(key);
 		} else {
-			log.info(logKey + " ������ �̵�� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + " 파일이 존재하지 않습니다.");
 			return;
 		}
 		
@@ -217,7 +217,7 @@ public class SubtitleHandler extends AbstractFileHandler {
 		if(SubtitleController.subtitlefiles.containsKey(key)) {
 			subtitleFile = SubtitleController.subtitlefiles.get(key);	
 		} else {
-			log.info(logKey + " ������ �ڸ� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + " 파일이 존재하지 않습니다.");
 			return;
 		}
 		
@@ -234,11 +234,11 @@ public class SubtitleHandler extends AbstractFileHandler {
 		}
 		else {
 			if(movieFile.get(MAConsts.DIRECTORY) == null) {
-				log.error(file.getName() + " �� �ڸ������� �̵��� ���丮�� �����ϴ�.");
+				log.error(file.getName() + " 파일의 디렉토리가 존재하지 않습니다.");
 			} else if(subtitleFile == null) {
-				log.error(file.getName() + " �� �ڸ� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 자막파일이 존재하지 않습니다.");
 			} else if(movieFile == null) {
-				log.error(file.getName() + " �� �̵�� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 미디어 파일이 존재하지 않습니다.");
 			}
 		}
 	}

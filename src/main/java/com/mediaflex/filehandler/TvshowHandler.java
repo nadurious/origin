@@ -39,7 +39,7 @@ public class TvshowHandler extends AbstractFileHandler {
 				
 				try {
 					
-					//�ø��� ������ ������
+					//시리즈 패턴이 있을 때
 					if(util.hasSiriesPattern(file)) {
 						
 //						String key = util.getPuerSiriesName(file.getName());
@@ -53,7 +53,7 @@ public class TvshowHandler extends AbstractFileHandler {
 						
 						if(util.isMediaFile(file)) {
 							String mkdirPath = MAConsts.TV_PATH + file.separator + key;
-							//Ű���� ������
+							//TV시리즈 디렉토리가 없을 때
 							if(!TvshowController.tvshowfiles.containsKey(key) || !TvshowController.tvshowfiles.get(key).containsKey(MAConsts.DIRECTORY)) {
 								File dir = mkdir(mkdirPath);
 								log.info("MKDIR : [" + dir.getParentFile().getName() + file.separator +dir.getAbsolutePath() +"]");
@@ -65,6 +65,7 @@ public class TvshowHandler extends AbstractFileHandler {
 								
 								chmod(dir.getAbsolutePath(), MAConsts.PERMISSION_777);
 							}
+							//TV 시리즈 디렉토리만 있을 때
 							else if(!TvshowController.tvshowfiles.get(key).containsKey(fileKey) && TvshowController.tvshowfiles.get(key).containsKey(MAConsts.DIRECTORY)) {
 		
 								File mvTvshow = move(file.getAbsolutePath(), mkdirPath + file.separator + file.getName());
@@ -74,7 +75,7 @@ public class TvshowHandler extends AbstractFileHandler {
 								
 								chmod(mvTvshow.getAbsolutePath(), MAConsts.PERMISSION_777);
 							}
-							//Ű���� ���丮�� ������
+							//둘 다 아닌경우 
 							else {
 								File mvTvshow = move(file.getAbsolutePath(), mkdirPath + file.separator + file.getName());
 								log.info("MOVE : [" + file.getParentFile().getName() + file.separator +file.getName() + "] -> [" + mvTvshow.getParentFile().getName() + file.separator + mvTvshow.getName() + "]");
@@ -127,9 +128,9 @@ public class TvshowHandler extends AbstractFileHandler {
 							log.debug(TvshowController.tvshowfiles.toString());
 						}
 					}
-					//��¥ ���ϸ� ������
+					//날짜 패턴은 있지만 시리즈 패턴이 없을 때
 					else if(util.hasDatePattern(file) && !util.hasSiriesPattern(file)) {
-						
+						//other 리스트를 뒤져서 있는지 찾아본다.	
 						List<String> otherList = Arrays.asList(MAConsts.others);
 						for(String other : otherList) {
 							if(file.getName().contains(other.toLowerCase())) {
@@ -240,7 +241,7 @@ public class TvshowHandler extends AbstractFileHandler {
 				
 			}//DELETE
 			else {
-				throw new Exception("MediaHandler : ���°��� ������ �ʾҽ��ϴ�.");
+				throw new Exception("MediaHandler : 알 수 없는 생성값이 들어왔습니다.");
 			}
 		} catch (Exception e) {
 			log.error(e.toString());
@@ -263,7 +264,7 @@ public class TvshowHandler extends AbstractFileHandler {
 		if(TvshowController.tvshowfiles.containsKey(key)) {
 			tvshowFile = TvshowController.tvshowfiles.get(key);
 		} else {
-			log.info(logKey + " ������ �̵�� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + " 파일의 미디어 파일이 존재하지 않습니다.");
 			return result;
 		}
 		
@@ -271,7 +272,7 @@ public class TvshowHandler extends AbstractFileHandler {
 		if(SubtitleController.subtitlefiles.containsKey(key)) {
 			subtitleFile = SubtitleController.subtitlefiles.get(key);	
 		} else {
-			log.info(logKey + " ������ �ڸ� ������ �������� �ʽ��ϴ�.");
+			log.info(logKey + " 파일의 자막 파일이 존재하지 않습니다.");
 			return result;
 		}
 		
@@ -290,11 +291,11 @@ public class TvshowHandler extends AbstractFileHandler {
 		}
 		else {
 			if(tvshowFile.get(MAConsts.DIRECTORY) == null) {
-				log.error(file.getName() + " �� �ڸ������� �̵��� ���丮�� �����ϴ�.");
+				log.error(file.getName() + " 파일의 디렉토리가 존재하지 않습니다.");
 			} else if(subtitleFile == null) {
-				log.error(file.getName() + " �� �ڸ� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 자막파일이 존재하지 않습니다.");
 			} else if(tvshowFile == null) {
-				log.error(file.getName() + " �� �̵�� ������ �����ϴ�.");
+				log.error(file.getName() + " 파일의 미디어 파일이 존재하지 않습니다.");
 			}
 		}
 		return result;
