@@ -17,6 +17,7 @@ public class TestHandler implements FileAlterationListener
 	private String id;
 	private String pw;
 	private String address;
+	private String etc;
 
     public TestHandler()
     {
@@ -125,6 +126,20 @@ public class TestHandler implements FileAlterationListener
 	 */
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	/**
+	 * @return the etc
+	 */
+	public String getEtc() {
+		return etc;
+	}
+
+	/**
+	 * @param etc the etc to set
+	 */
+	public void setEtc(String etc) {
+		this.etc = etc;
 	}
 }
 
